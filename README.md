@@ -1,9 +1,15 @@
-🎵 MM&SM - Звук для відеоігор
+# 🎵 MM&SM - Звук для відеоігор
 
-https://img.shields.io/badge/python-3.9%2B-blue
-https://img.shields.io/badge/license-MIT-green
-https://img.shields.io/badge/platform-Windows-lightgrey
-https://img.shields.io/badge/UI-CustomTkinter-orange
+<div align="center">
+
+![Python Version](https://img.shields.io/badge/Python-3.9%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge&logo=opensourceinitiative&logoColor=white)
+![Platform](https://img.shields.io/badge/Platform-Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
+![UI](https://img.shields.io/badge/UI-CustomTkinter-FF6B6B?style=for-the-badge&logo=tkinter&logoColor=white)
+![Downloads](https://img.shields.io/github/downloads/your_username/MM&SM/total?style=for-the-badge&logo=github&logoColor=white)
+![Stars](https://img.shields.io/github/stars/your_username/MM&SM?style=for-the-badge&logo=github&logoColor=white)
+
+</div>
 
 MM&SM — це легкий, сучасний та повністю безкоштовний додаток для створення звуку у відеоіграх. Поєднує в собі потужний генератор звукових ефектів (як у Bfxr) та простий музичний синтезатор з базовими інструментами. Ідеальне рішення для інді-розробників, геймдизайнерів та всіх, хто хоче швидко створити унікальний звуковий супровід.
 
