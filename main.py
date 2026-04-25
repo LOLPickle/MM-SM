@@ -1,4 +1,6 @@
+from tkinter import filedialog
 import customtkinter 
+import os
 
 class TextFrame(customtkinter.CTkFrame):
 	def __init__(self, master, **kwargs):
@@ -7,7 +9,7 @@ class TextFrame(customtkinter.CTkFrame):
 		self.label = customtkinter.CTkLabel(self, text="MiXT", font=('',70))
 		self.label.grid(row=0, column=0, padx=20, pady=20)
 
-		self.info = customtkinter.CTkLabel(self, text="v.alpha.2", font=('',20))
+		self.info = customtkinter.CTkLabel(self, text="v.1.1", font=('',20))
 		self.info.grid(row=1, column=0, padx=20, pady=(0,20))
 
 class ButtonsFrame(customtkinter.CTkFrame):
@@ -31,17 +33,30 @@ class NewProject(customtkinter.CTkToplevel):
         super().__init__(parent)
 
         self.title("New Project")
-        self.geometry("380x200")
+        self.geometry("400x250")
         self.resizable(False, False)
 
-        self.inputFrame = customtkinter.CTkFrame(master=self)
-        self.inputFrame.grid(row=0, column=0, padx=20, pady=(20,10))
+        self.optionFrame = customtkinter.CTkFrame(master=self)
+        self.optionFrame.grid(row=0, column=0, padx=20, pady=(20,10))
+
+        self.inputFrame = customtkinter.CTkFrame(self.optionFrame)
+        self.inputFrame.grid(row=0, column=0, padx=20, pady=(10,5))
 
         self.name = customtkinter.CTkLabel(self.inputFrame, text="Name")
-        self.name.grid(row=0, column=0, padx=(20,10), pady=20)
+        self.name.grid(row=0, column=0, padx=(10,5), pady=10)
 
         self.name_input = customtkinter.CTkEntry(self.inputFrame, placeholder_text="project name")
-        self.name_input.grid(row=0, column=1, padx=(10,20), pady=20)
+        self.name_input.grid(row=0, column=1, padx=(5,10), pady=10)
+
+
+        self.enter_folder = customtkinter.CTkFrame(self.optionFrame)
+        self.enter_folder.grid(row=1, column=0, padx=20, pady=(5,10))
+
+        self.entry_path = customtkinter.CTkEntry(self.enter_folder, width=200, state="readonly")
+        self.entry_path.grid(row=0, column=0, padx=(10,5), pady=10)
+
+        self.btn_browse = customtkinter.CTkButton(self.enter_folder, text="Browse...", command=self.choose_path, width=90)
+        self.btn_browse.grid(row=0, column=1, padx=(5,10), pady=10)
 
         # ------------- 
 
@@ -49,14 +64,32 @@ class NewProject(customtkinter.CTkToplevel):
         self.btns_Frame.grid(row=1, column=0, padx=20, pady=(10, 20))
 
         self.btn_cancel = customtkinter.CTkButton(self.btns_Frame, text="Cancel", command=self.destroy)
-        self.btn_cancel.grid(row=1, column=0, padx=(20,10), pady=20)
+        self.btn_cancel.grid(row=1, column=1, padx=(10,20), pady=20)
 
         self.btn_create = customtkinter.CTkButton(self.btns_Frame, text="Create", command=self.save)
-        self.btn_create.grid(row=1, column=1, padx=(10,20), pady=20)
+        self.btn_create.grid(row=1, column=0, padx=(20,10), pady=20)
+
+    def choose_path(self):
+    	path = filedialog.askdirectory(title="Оберіть місце для створення папки")
+
+    	if path:
+    		self.entry_path.configure(state="normal")
+    		self.entry_path.delete(0, "end")
+    		self.entry_path.insert(0, path)
+    		self.entry_path.configure(state="readonly")
 
     def save(self):
         self.ProjName = self.name_input.get()
-        print(self.ProjName)
+        self.Path = self.entry_path.get()
+
+        full_path = os.path.join(self.Path, self.ProjName)
+
+        try:
+        	os.makedirs(full_path, exist_ok=True)
+        except Exception as e:
+        	print("Error")
+
+        self.destroy()
 
 
 class App(customtkinter.CTk):
